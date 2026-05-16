@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 from datetime import datetime, timedelta
+import pytz
 
 # --- ページ設定 ---
 st.set_page_config(
@@ -21,7 +22,9 @@ st.markdown("""
 # --- ヘッダー領域 ---
 st.title("大雪山 地下水保全データプロジェクト")
 st.subheader("三千櫻酒造 様 専用コンソール（プロトタイプ）")
-st.markdown(f"現在時刻: **{datetime.now().strftime('%Y年%m月%d日 %H:%M')}** | システム状態: <span class='status-green'>稼働中（正常）</span>", unsafe_allow_html=True)
+jst = pytz.timezone('Asia/Tokyo')
+current_time = datetime.now(jst).strftime('%Y年%m月%d日 %H:%M')
+st.markdown(f"現在時刻: **{current_time}** | システム状態: <span class='status-green'>稼働中（正常）</span>", unsafe_allow_html=True)
 st.markdown("---")
 
 # --- カラムレイアウト設定（左:広域データ、中央:リアルタイム、右:AIアラート） ---
